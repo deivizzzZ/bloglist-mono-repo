@@ -1,0 +1,10 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZWViZjdkNGNjNDU1YmFhNjc0MDdjMyIsInVzZXJuYW1lIjoicm9vdCIsImlhdCI6MTY1OTgxNzI3OX0.G1CbiG6MPWSFjfIDRcM0Nd4rSo690OHiv0jUcBZ8EE0
+
+{
+  "title": "Título de prueba",
+  "author": "Autor de prueba",
+  "url": "https://prueba.es",
+  "likes": 0
+}
