@@ -1,7 +1,12 @@
 import { useState, useRef } from 'react'
+import { useDispatch } from 'react-redux'
 import Togglable from './Togglable'
+import { createNewBlog } from '../reducers/blogReducer'
+import { showNotification } from '../reducers/notificationReducer'
 
-export default function BlogForm({ createBlog }) {
+export default function BlogForm() {
+  const dispatch = useDispatch()
+
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
@@ -11,7 +16,10 @@ export default function BlogForm({ createBlog }) {
     event.preventDefault()
 
     const blogData = { title, author, url }
-    createBlog(blogData)
+    dispatch(createNewBlog(blogData))
+    dispatch(
+      showNotification(`a new blog ${title} by ${author} added`, 'info', 5)
+    )
 
     setTitle('')
     setAuthor('')

@@ -1,6 +1,10 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { setALike, removeBlog } from '../reducers/blogReducer'
 
-const Blog = ({ blog, addLike, removeBlog }) => {
+const Blog = ({ blog }) => {
+  const dispatch = useDispatch()
+
   const [visible, setVisible] = useState(false)
 
   const blogStyle = {
@@ -11,20 +15,13 @@ const Blog = ({ blog, addLike, removeBlog }) => {
     marginBottom: 5
   }
 
-  const handleLike = () => {
-    const newBlogInfo = {
-      title: blog.title,
-      author: blog.author,
-      url: blog.url,
-      likes: blog.likes + 1
-    }
-
-    addLike(blog.id, newBlogInfo)
+  const like = blog => {
+    dispatch(setALike(blog))
   }
 
   const handleDelete = () => {
     if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
-      removeBlog(blog.id)
+      dispatch(removeBlog(blog.id))
     }
   }
 
@@ -41,7 +38,7 @@ const Blog = ({ blog, addLike, removeBlog }) => {
           <div className="url">{blog.url}</div>
           <div className="likes">
             likes {blog.likes}
-            <button onClick={handleLike}>like</button>
+            <button onClick={() => like(blog)}>like</button>
           </div>
           <div>{blog.user.name}</div>
           {blog.user.username ===

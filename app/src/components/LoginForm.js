@@ -1,6 +1,11 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { loginUser } from '../reducers/userReducer'
+import { showNotification } from '../reducers/notificationReducer'
 
-export default function LoginForm({ loginApp }) {
+export default function LoginForm() {
+  const dispatch = useDispatch()
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -8,7 +13,9 @@ export default function LoginForm({ loginApp }) {
     event.preventDefault()
 
     const loginData = { username, password }
-    loginApp(loginData)
+    dispatch(loginUser(loginData)).catch(() =>
+      dispatch(showNotification('wrong credentials', 'error', 5))
+    )
 
     setUsername('')
     setPassword('')
