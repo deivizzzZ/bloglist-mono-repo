@@ -24,34 +24,34 @@ const Blog = ({ blog, addLike, removeBlog }) => {
 
   const handleDelete = () => {
     if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
-
       removeBlog(blog.id)
     }
   }
 
   return (
-    <div className='blog' style={blogStyle}>
+    <div className="blog" style={blogStyle}>
       <div>
         {blog.title} {blog.author}
-        <button onClick={() => setVisible(!visible)}>{visible ? 'hide' : 'view'}</button>
+        <button onClick={() => setVisible(!visible)}>
+          {visible ? 'hide' : 'view'}
+        </button>
       </div>
-      { visible
-        ? <>
-          <div className='url'>{blog.url}</div>
-          <div className='likes'>
-              likes {blog.likes}
+      {visible ? (
+        <>
+          <div className="url">{blog.url}</div>
+          <div className="likes">
+            likes {blog.likes}
             <button onClick={handleLike}>like</button>
           </div>
           <div>{blog.user.name}</div>
-          { blog.user.username === JSON.parse(window.localStorage.getItem('loggedUser')).username
-            ? <div className='remove'>
+          {blog.user.username ===
+          JSON.parse(window.localStorage.getItem('loggedUser')).username ? (
+            <div className="remove">
               <button onClick={handleDelete}>remove</button>
             </div>
-            : null
-          }
+          ) : null}
         </>
-        : null
-      }
+      ) : null}
     </div>
   )
 }

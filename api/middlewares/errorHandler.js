@@ -1,6 +1,5 @@
 const ERROR_HANDLERS = {
-  CastError: res =>
-    res.status(400).end(),
+  CastError: res => res.status(400).end(),
 
   JsonWebTokenError: res =>
     res.status(401).json({ error: 'token missing or invalid' }),

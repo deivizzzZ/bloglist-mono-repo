@@ -15,7 +15,9 @@ function App() {
   const [createdBlog, setCreatedBlog] = useState(null)
 
   useEffect(() => {
-    blogService.getAll().then(blogs => setBlogs(blogs.sort((a, b) => b.likes - a.likes)))
+    blogService
+      .getAll()
+      .then(blogs => setBlogs(blogs.sort((a, b) => b.likes - a.likes)))
   }, [])
 
   useEffect(() => {
@@ -26,7 +28,7 @@ function App() {
     }
   }, [])
 
-  const loginApp = async (loginData) => {
+  const loginApp = async loginData => {
     try {
       const loggedUser = await loginService.login({
         username: loginData.username,
@@ -36,7 +38,7 @@ function App() {
       setUser(loggedUser)
       blogService.setToken(loggedUser.token)
       window.localStorage.setItem('loggedUser', JSON.stringify(loggedUser))
-    } catch(e) {
+    } catch (e) {
       setErrorMessage(true)
       setTimeout(() => setErrorMessage(false), 5000)
     }
@@ -48,7 +50,7 @@ function App() {
     window.localStorage.removeItem('loggedUser')
   }
 
-  const createBlog = async (blogData) => {
+  const createBlog = async blogData => {
     try {
       const newBlog = await blogService.create({
         title: blogData.title,
@@ -99,7 +101,6 @@ function App() {
         <LoginForm loginApp={loginApp} />
         {errorMessage ? <Error /> : null}
       </>
-
     )
   }
 
@@ -112,7 +113,14 @@ function App() {
         <button onClick={handleLogout}>logout</button>
       </p>
       <BlogForm createBlog={createBlog} />
-      {blogs.map(blog => <Blog key={blog.id} blog={blog} addLike={addLike} removeBlog={removeBlog} />)}
+      {blogs.map(blog => (
+        <Blog
+          key={blog.id}
+          blog={blog}
+          addLike={addLike}
+          removeBlog={removeBlog}
+        />
+      ))}
     </>
   )
 }

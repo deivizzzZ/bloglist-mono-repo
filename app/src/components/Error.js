@@ -8,7 +8,7 @@ const Error = () => {
     borderRadius: '5px'
   }
   return (
-    <div style={mystyle} className='error'>
+    <div style={mystyle} className="error">
       wrong username or password
     </div>
   )

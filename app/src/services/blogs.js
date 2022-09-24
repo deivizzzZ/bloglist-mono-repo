@@ -22,7 +22,7 @@ const create = blog => {
 }
 
 const update = (id, blog) => {
-  const config= {
+  const config = {
     headers: {
       Authorization: token
     }

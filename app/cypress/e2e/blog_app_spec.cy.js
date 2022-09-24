@@ -42,7 +42,10 @@ describe('Blog app', () => {
       cy.get('[name="author"]').type('Ludvig Amide')
       cy.get('[name="url"]').type('http://acypressblog.com')
       cy.get('#blog-form-button').click()
-      cy.get('.blog').should('contain', 'A blog created by Cypress Ludvig Amide')
+      cy.get('.blog').should(
+        'contain',
+        'A blog created by Cypress Ludvig Amide'
+      )
     })
 
     describe('If a blog exists', () => {
@@ -102,7 +105,9 @@ describe('Blog app', () => {
 
       it('the blogs are ordered according to likes', () => {
         cy.get('.blog').eq(0).should('contain', 'The title with the most likes')
-        cy.get('.blog').eq(1).should('contain', 'The title with the second most likes')
+        cy.get('.blog')
+          .eq(1)
+          .should('contain', 'The title with the second most likes')
       })
     })
   })

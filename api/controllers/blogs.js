@@ -19,23 +19,24 @@ blogsRouter.post('/', userExtractor, async (request, response, next) => {
     if (newBlog.title && newBlog.url) {
       const { id } = request
       const user = await User.findById(id)
-  
+
       const blogToSave = new Blog({
         ...newBlog,
         likes: newBlog.likes || 0,
         user: user._id
       })
-    
-      const savedBlog = await (await blogToSave.save()).populate('user', {
+
+      const savedBlog = await (
+        await blogToSave.save()
+      ).populate('user', {
         username: 1,
         name: 1
       })
-  
+
       user.blogs = user.blogs.concat(savedBlog._id)
       await user.save()
-  
+
       response.status(201).json(savedBlog)
-  
     } else {
       response.status(400).end()
     }
@@ -51,13 +52,17 @@ blogsRouter.delete('/:id', userExtractor, async (request, response, next) => {
     const blog = await Blog.findById(blogId)
 
     if (blog.user.toString() !== userId.toString()) {
-      return response.status(401).json({ error: 'you are not the blog\'s creator' })
+      return response
+        .status(401)
+        .json({ error: "you are not the blog's creator" })
     }
 
     const user = await User.findById(userId)
     const deletedBlog = await Blog.findByIdAndDelete(blogId)
 
-    user.blogs = user.blogs.filter(blog => blog.toString() !== deletedBlog._id.toString())
+    user.blogs = user.blogs.filter(
+      blog => blog.toString() !== deletedBlog._id.toString()
+    )
     await user.save()
 
     response.status(204).end()
@@ -78,7 +83,9 @@ blogsRouter.put('/:id', async (request, response, next) => {
   }
 
   try {
-    const updatedBlog = await Blog.findByIdAndUpdate(id, newBlogInfo, { new: true }).populate('user', {
+    const updatedBlog = await Blog.findByIdAndUpdate(id, newBlogInfo, {
+      new: true
+    }).populate('user', {
       username: 1,
       name: 1
     })

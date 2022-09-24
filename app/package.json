@@ -42,5 +42,6 @@
   "devDependencies": {
     "@testing-library/user-event": "^14.4.3",
     "cypress": "^10.6.0"
-  }
+  },
+  "proxy": "http://localhost:3003"
 }

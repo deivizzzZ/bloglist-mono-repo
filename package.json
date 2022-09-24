@@ -14,14 +14,25 @@
   "scripts": {
     "build": "npm run build --workspace=app",
     "start": "npm run start --workspace=api",
-    "dev:api": "npm run build && npm run dev --workspace=api"
+    "dev:api": "npm run build && npm run dev --workspace=api",
+    "dev:app": "npm run start --workspace=app"
   },
   "devDependencies": {
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-jest": "^26.8.2",
-    "jest-watch-typeahead": "^0.6.5"
+    "eslint-plugin-prettier": "^4.2.1",
+    "jest-watch-typeahead": "^0.6.5",
+    "prettier": "^2.7.1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "prettier": {
+    "trailingComma": "none",
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true,
+    "arrowParens": "avoid"
+  }
 }

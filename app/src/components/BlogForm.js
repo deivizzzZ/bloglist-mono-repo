@@ -7,7 +7,7 @@ export default function BlogForm({ createBlog }) {
   const [url, setUrl] = useState('')
   const togglableRef = useRef()
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault()
 
     const blogData = { title, author, url }
@@ -20,37 +20,37 @@ export default function BlogForm({ createBlog }) {
   }
 
   return (
-    <Togglable buttonLabel='create new blog' ref={togglableRef}>
+    <Togglable buttonLabel="create new blog" ref={togglableRef}>
       <h2>create new</h2>
       <form onSubmit={handleSubmit}>
-        <div className='title'>
+        <div className="title">
           <label>title:</label>
           <input
-            type='text'
-            name='title'
+            type="text"
+            name="title"
             value={title}
             onChange={event => setTitle(event.target.value)}
           />
         </div>
-        <div className='author'>
+        <div className="author">
           <label>author:</label>
           <input
-            type='text'
-            name='author'
+            type="text"
+            name="author"
             value={author}
             onChange={event => setAuthor(event.target.value)}
           />
         </div>
-        <div className='url'>
+        <div className="url">
           <label>url:</label>
           <input
-            type='text'
-            name='url'
+            type="text"
+            name="url"
             value={url}
             onChange={event => setUrl(event.target.value)}
           />
         </div>
-        <button id='blog-form-button'>create</button>
+        <button id="blog-form-button">create</button>
       </form>
     </Togglable>
   )

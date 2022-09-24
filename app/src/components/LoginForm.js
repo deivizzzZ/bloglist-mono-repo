@@ -4,7 +4,7 @@ export default function LoginForm({ loginApp }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault()
 
     const loginData = { username, password }
@@ -21,8 +21,8 @@ export default function LoginForm({ loginApp }) {
         <div>
           <label>username</label>
           <input
-            type='text'
-            name='username'
+            type="text"
+            name="username"
             value={username}
             onChange={event => setUsername(event.target.value)}
           />
@@ -30,13 +30,13 @@ export default function LoginForm({ loginApp }) {
         <div>
           <label>password</label>
           <input
-            type='password'
-            name='password'
+            type="password"
+            name="password"
             value={password}
             onChange={event => setPassword(event.target.value)}
           />
         </div>
-        <button id='login-form-button'>login</button>
+        <button id="login-form-button">login</button>
       </form>
     </>
   )
