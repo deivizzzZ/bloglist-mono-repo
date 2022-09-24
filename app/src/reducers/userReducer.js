@@ -20,8 +20,8 @@ export const { setUser, clearUser } = userSlice.actions
 
 export const initUser = () => {
   const loggedUser = JSON.parse(window.localStorage.getItem('loggedUser'))
-  if (loggedUser) {
-    return async dispatch => {
+  return async dispatch => {
+    if (loggedUser) {
       dispatch(setUser(loggedUser))
       blogService.setToken(loggedUser.token)
     }
