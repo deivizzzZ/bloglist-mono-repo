@@ -3,11 +3,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Routes, Route, useMatch } from 'react-router-dom'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
+import Menu from './components/Menu'
 import BlogList from './views/BlogList'
 import Users from './views/Users'
 import UserDetail from './views/UserDetail'
+import BlogDetail from './views/BlogDetail'
 import { initializeBlogs } from './reducers/blogReducer'
-import { initUser, logoutUser } from './reducers/userReducer'
+import { initUser } from './reducers/userReducer'
 import userService from './services/users'
 
 function App() {
@@ -29,13 +31,14 @@ function App() {
     dispatch(initUser())
   }, [dispatch])
 
-  const handleLogout = () => {
-    dispatch(logoutUser())
-  }
-
   const userMatch = useMatch('/users/:id')
   const detailedUser = userMatch
     ? users.find(u => u.id === userMatch.params.id)
+    : null
+
+  const blogMatch = useMatch('/blogs/:id')
+  const detailedBlog = blogMatch
+    ? blogs.find(b => b.id === blogMatch.params.id)
     : null
 
   if (user === null) {
@@ -50,17 +53,15 @@ function App() {
   return (
     <>
       <div>
-        <h2>blogs</h2>
+        <Menu user={user} />
+        <h2>blog app</h2>
         <Notification />
-        <p>
-          {user.name} logged in
-          <button onClick={handleLogout}>logout</button>
-        </p>
       </div>
       <Routes>
         <Route path="/" element={<BlogList blogs={blogs} />} />
         <Route path="/users" element={<Users users={users} />} />
         <Route path="/users/:id" element={<UserDetail user={detailedUser} />} />
+        <Route path="/blogs/:id" element={<BlogDetail blog={detailedBlog} />} />
       </Routes>
     </>
   )
