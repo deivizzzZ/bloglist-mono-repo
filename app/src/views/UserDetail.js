@@ -1,17 +1,24 @@
+import ListGroup from 'react-bootstrap/ListGroup'
+import Spinner from 'react-bootstrap/Spinner'
+
 const UserDetail = ({ user }) => {
   if (!user) {
-    return <p>Loading...</p>
+    return (
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    )
   }
 
   return (
     <>
       <h2>{user.name}</h2>
       <h3>added blogs</h3>
-      <ul>
+      <ListGroup>
         {user.blogs.map(blog => (
-          <li key={blog.id}>{blog.title}</li>
+          <ListGroup.Item key={blog.id}>{blog.title}</ListGroup.Item>
         ))}
-      </ul>
+      </ListGroup>
     </>
   )
 }

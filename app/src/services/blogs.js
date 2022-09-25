@@ -40,11 +40,17 @@ const remove = id => {
   axios.delete(`${baseUrl}/${id}`, config)
 }
 
+const freeUpdate = (id, blog) => {
+  const request = axios.put(`${baseUrl}/${id}/comments`, blog)
+  return request.then(response => response.data)
+}
+
 const blogService = {
   getAll,
   create,
   setToken,
   update,
-  remove
+  remove,
+  freeUpdate
 }
 export default blogService

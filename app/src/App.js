@@ -43,27 +43,25 @@ function App() {
 
   if (user === null) {
     return (
-      <>
+      <div className="container">
         <LoginForm />
         <Notification />
-      </>
+      </div>
     )
   }
 
   return (
-    <>
-      <div>
-        <Menu user={user} />
-        <h2>blog app</h2>
-        <Notification />
-      </div>
+    <div className="container">
+      <Menu user={user} />
+      <h2>blog app</h2>
+      <Notification />
       <Routes>
         <Route path="/" element={<BlogList blogs={blogs} />} />
         <Route path="/users" element={<Users users={users} />} />
         <Route path="/users/:id" element={<UserDetail user={detailedUser} />} />
         <Route path="/blogs/:id" element={<BlogDetail blog={detailedBlog} />} />
       </Routes>
-    </>
+    </div>
   )
 }
 
